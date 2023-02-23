@@ -1,0 +1,26 @@
+{
+  "name": "challenge14",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Ahneb/Tech-Blog.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Ahneb/Tech-Blog/issues"
+  },
+  "homepage": "https://github.com/Ahneb/Tech-Blog#readme",
+  "dependencies": {
+    "mysql2": "^3.1.2",
+    "node": "^19.6.0",
+    "nodemon": "^2.0.20",
+    "sequelize": "^6.28.1"
+  }
+}
