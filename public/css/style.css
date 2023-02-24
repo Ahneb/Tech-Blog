@@ -1,7 +1,9 @@
 *{
   --tan: rgb(231, 191, 152);
-  --text: rgb(248, 240, 205);
+  --text_light: rgb(248, 240, 205);
   --brown: rgb(168, 119, 90);
+  --subtitle-text: rgb(211, 194, 174);
+  --title-text: rgb(87, 65, 31);
   margin: 0;
   padding: 0;
   text-decoration: none;
@@ -12,29 +14,75 @@ html {
   background-color: var(--tan);
 }
 
+/* spacing formatting */
+.flex {
+  display: flex;
+}
+
 .flex-row {
   display: flex;
   flex-direction: row;
 }
 
-.space_even {
+.flex-end {
+  justify-content: flex-end;
+}
+
+.space-even {
   justify-content: space-evenly;
 }
 
-.nav-items {
-  padding: 2rem 0 2rem 2rem;
+.space-between {
+  justify-content: space-between;
 }
 
-.bg-tan {
+/* color formatting */
+.bg-brown {
   background: var(--brown);
-} 
+}
 
 .txt-color {
-  color: var(--text);
+  color: var(--text_light);
+}
+
+.title-txt-color {
+  color: var(--title-text);
+}
+
+.sub-txt-color {
+  color: var(--subtitle-text);
+}
+
+
+/* margin formatting */
+.m1h{
+  margin: 1.5rem;
+}
+
+.mh{
+  margin: 0.5rem;
+}
+
+
+/* padding formatting */
+.ph {
+  padding: 0.5rem;
+}
+
+.p2 {
+  padding: 2rem;
+}
+
+.pt1 {
+  padding-top: 1rem;
 }
 
 .pt2 {
   padding-top: 2rem;
+}
+
+.pb1 {
+  padding-bottom: 1rem;
 }
 
 .pb2 {
@@ -49,8 +97,26 @@ html {
   padding-right: 2rem;
 }
 
-.txt-sz2 {
+
+/* text size formatting */
+.txt-sz-small {
+  font-size: 0.75em;
+}
+
+.txt-sz1 {
+  font-size: 1em;
+}
+
+.txt-sz1h {
   font-size: 1.5em;
+}
+
+.txt-sz2 {
+  font-size: 2em;
+}
+
+.txt-bold {
+  font-weight: 550;
 }
 
 .banner-spacing {
@@ -63,3 +129,6 @@ html {
   display: none;
 }
 
+.border {
+  border: 2px solid var(--brown);
+}
