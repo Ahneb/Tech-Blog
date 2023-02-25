@@ -1,10 +1,12 @@
 require('dotenv').config();
 const express = require('express');
 const mainRouter = require('./controller');
+require('./models');
 const expressHandlebars = require('express-handlebars');
 const sequelize = require('sequelize');
 
 const handlebars = expressHandlebars.create();
+
 
 const app = express();
 
@@ -17,6 +19,8 @@ app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
 app.use(mainRouter);
 
-app.listen(PORT,() => {
-  console.log('listening on PORT: ' + PORT);
+sequelize.sync(() => {
+  app.listen(PORT,() => {
+    console.log('listening on PORT: ' + PORT);
+  });
 });
