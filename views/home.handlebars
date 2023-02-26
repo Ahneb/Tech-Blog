@@ -17,7 +17,17 @@
       Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident est dolorum facere? Odit, similique amet. Recusandae sint facilis debitis explicabo.
     </div>
   </section>
+  <div id="button_container" class="flex p2 pt1">
+    <button id="new_post" style="width: 100%; height: 3em; font-size: 1rem;">New Post</button>
+  </div>
 </main>
 
 <script>
+  if (!document.cookie.includes('session_token=')) {
+    document.querySelector('#button_container').classList.add('hidden');
+  };
+
+  document.querySelector('#new_post').addEventListener('click', (event) => {
+    window.location.replace('/create');
+  })
 </script>

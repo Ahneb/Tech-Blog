@@ -1,0 +1,62 @@
+<main>
+  <section id="topic_container" class="m1h border">
+    <header id="topic_header" class="ph bg-brown">
+      <div class="txt-sz2 title-txt-color txt-bold">
+        Create New Post
+      </div>
+    </header>
+    <div id="topic_info" class="ph txt-sz1h">
+      <div class="p1">
+        <div id="post_error_msg" class="error-txt-color pb1 pt1 hidden"></div>
+        <header class="title-txt-color">
+          Title
+        </header>
+        <input id="post_title" type="text" placeholder="Enter Title..." style="width: 100%;">
+        <header class="title-txt-color pt1">
+          Content
+        </header>
+        <textarea id="post_description" placeholder="Enter Title..." style="width: 100%;" rows="10"></textarea>
+      </div>
+      <div class="flex p2">
+        <button id="create_post" style="width: 100%; height: 3em; font-size: 1rem;">Create Post</button>
+      </div>
+    </div>
+  </section>
+</main>
+
+<script>
+  document.querySelector('#create_post').addEventListener('click', (event) => {
+    event.preventDefault();
+
+    const title = document.querySelector('#post_title').value;
+    const text = document.querySelector('#post_description').value;
+    const error = document.querySelector('#post_error_msg');
+
+    error.textContent = '';
+    if(!title.trim().length || !text.trim().length) {
+      error.classList.remove('hidden');
+      error.textContent = 'Neither fields can be empty';
+      return;
+    };
+
+    fetch('/api/posts', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({
+        'title': title,
+        'text': text,
+      }),
+    }).then((result) => {
+      if (!result.ok) {
+        console.log('something went wrong with post');
+      } else {
+        window.location.replace('/dash');
+        console.log('things were good with post');
+      };
+    });
+  });
+
+  
+</script>

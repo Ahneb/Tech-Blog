@@ -1,8 +1,9 @@
 require('dotenv').config();
 
 const express = require('express');
-const sequelize = require('./config/connection');
+const cookieParser = require('cookie-parser');
 
+const sequelize = require('./config/connection');
 const mainRouter = require('./controller');
 require('./models');
 
@@ -18,6 +19,8 @@ app.use(express.static('public'));
 
 app.engine('handlebars', handlebars.engine);
 app.set('view engine', 'handlebars');
+
+app.use(cookieParser());
 app.use(mainRouter);
 
 sequelize.sync().then(() => {

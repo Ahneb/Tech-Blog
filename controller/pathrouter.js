@@ -22,4 +22,8 @@ pathRouter.get('/dash', async (req, res) => {
   res.render('dash');
 });
 
+pathRouter.get('/create', async (req, res) => {
+  res.render('create');
+});
+
 module.exports = pathRouter;
