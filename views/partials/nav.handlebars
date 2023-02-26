@@ -27,11 +27,15 @@
 <script>
   const login = document.querySelector('#login');
   const logout = document.querySelector('#logout');
+  const dash = document.querySelector('#dash');
+
 
   if (document.cookie.includes('session_token=')) {
     login.classList.add('hidden');
+
   } else {
     logout.classList.add('hidden');
+    dash.classList.add('hidden');
   }
 
   document.querySelector('#home').addEventListener('click', (event) => {

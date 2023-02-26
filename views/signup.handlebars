@@ -51,6 +51,8 @@
     }).then((result) => {
       if (!result.ok) {
         error.textContent = 'Email already taken'
+      } else {
+        window.location.replace('/login');
       };
     });
   });
