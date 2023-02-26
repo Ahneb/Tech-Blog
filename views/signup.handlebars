@@ -1,21 +1,57 @@
 <main>
   <section id="login_form" class="border m1h">
     <div class="p2 pb1">
+      <div id="error_msg" class="error-txt-color pb1"></div>
       <header class="txt-sz1h txt-bold title-txt-color">
         Email:
       </header>
-      <input type="text" placeholder="Enter Email" style="width: 100%;">
+      <input id="email" type="text" placeholder="Enter Email" style="width: 100%;">
       <header class="txt-sz1h txt-bold title-txt-color pt1">
         Password:
       </header>
-      <input type="text" placeholder="Enter Password" style="width: 100%;">
+      <input id="pass1" type="text" placeholder="Enter Password" style="width: 100%;">
       <header class="txt-sz1h txt-bold title-txt-color pt1">
         Confirm Password:
       </header>
-      <input type="text" placeholder="Enter Password" style="width: 100%;">
+      <input id="pass2" type="text" placeholder="Enter Password" style="width: 100%;">
     </div>
     <div class="flex p2 pt1 txt-sz1 flex-end">
-      <button>Create Account</button>
+      <button id="create_acc">Create Account</button>
     </div>
   </section>
 </main>
+
+<script>
+  document.querySelector('#create_acc').addEventListener('click', (event) => {
+    event.preventDefault();
+
+    const email1 = document.querySelector('#email').value;
+    const password1 = document.querySelector('#pass1').value;
+    const passcheck1 = document.querySelector('#pass2').value;
+    const error = document.querySelector('#error_msg');
+
+    console.log( email1, password1, passcheck1);
+
+    error.textContent = '';
+    if ( !(password1 === passcheck1) ) {
+      console.log('passwords do not match');
+      error.textContent = 'Passwords do not match'
+      return;
+    };
+
+    fetch('/api/user', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ 
+        'email': email1, 
+        'password': password1
+        }),
+    }).then((result) => {
+      if (!result.ok) {
+        error.textContent = 'Email already taken'
+      };
+    });
+  });
+</script>
