@@ -4,6 +4,7 @@
   --brown: rgb(168, 119, 90);
   --subtitle-text: rgb(211, 194, 174);
   --title-text: rgb(87, 65, 31);
+  --error-text: rgb(228, 62, 62);
   margin: 0;
   padding: 0;
   text-decoration: none;
@@ -53,6 +54,9 @@ html {
   color: var(--subtitle-text);
 }
 
+.error-txt-color {
+  color: var(--error-text);
+}
 
 /* margin formatting */
 .m1h{

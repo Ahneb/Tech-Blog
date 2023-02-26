@@ -1,6 +1,7 @@
 <main>
   <section id="login_form" class="border m1h">
     <div class="p2 pb1">
+      <div id="error_msg" class="error-txt-color pb1"></div>
       <header class="txt-sz2 title-txt-color">
         Email:
       </header>
@@ -11,7 +12,7 @@
       <input id="login_password" type="text" placeholder="Enter Password" style="width: 100%;">
     </div>
     <div class="flex p2 pt1 txt-sz1 space-between">
-      <a href="" class="txt-color">Sign Up</a>
+      <a id="signup_redirect" class="txt-color">Sign Up</a>
       <button id="login_button">Login</button>
     </div>
   </section>
@@ -41,14 +42,22 @@
 
     const email = document.querySelector('#login_email').value;
     const password = document.querySelector('#login_password').value;
-  
+    const error = document.querySelector('#error_msg');
+
+    console.log(error);
+    error.textContent = '';
     callAPI('/user/login', 'POST', { email, password }).then((data) => {
       console.log('success with login post');
-      
       window.location.replace('/');
     }).catch((e) => {
+      error.textContent = "Email or Password Incorrect";
       console.log('error with login post', e);
-    })
+    });
+  });
+
+  document.querySelector('#signup_redirect').addEventListener('click', (event) => {
+    event.preventDefault();
+    window.location.replace('/signup');
   });
 
 </script>

@@ -64,3 +64,8 @@ userRouter.post('/login', async (req, res) => {
     id: existingUser.id,
   }); 
 });
+
+userRouter.post("/logout", async (req, res) => {
+  res.clearCookie('session_token');
+  res.end();
+});

@@ -25,6 +25,15 @@
 </nav>
 
 <script>
+  const login = document.querySelector('#login');
+  const logout = document.querySelector('#logout');
+
+  if (document.cookie.includes('session_token=')) {
+    login.classList.add('hidden');
+  } else {
+    logout.classList.add('hidden');
+  }
+
   document.querySelector('#home').addEventListener('click', (event) => {
     event.preventDefault();
     window.location.replace('/');
@@ -42,5 +51,18 @@
 
   document.querySelector('#logout').addEventListener('click', (event) => {
     event.preventDefault();
+
+    fetch('/api/user/logout', {
+      method: 'POST',
+    }).then((result) => {
+      if (!result.ok) {
+        console.log('cookie clear failed');
+      } else {
+        console.log('cookie clear passed');
+        window.location.replace('/');
+      };
+    });
   });
+
+
 </script>
