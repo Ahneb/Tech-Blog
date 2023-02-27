@@ -1,25 +1,9 @@
 <main>
-  <section id="topic_container" class="m1h border">
-    <header id="topic_header" class="ph bg-brown">
-      <div class="txt-sz2 title-txt-color txt-bold">
-        This is the title of this article
-      </div>
-      <div class="txt-sz1 flex space-between pt1 ">
-        <div class="flex-start sub-txt-color">
-          By: name
-        </div>
-        <div class="flex-end sub-txt-color">
-          time placeholder
-        </div>
-      </div>
-    </header>
-    <div id="topic_info" class="ph txt-sz1h">
-      Lorem ipsum dolor sit amet consectetur, adipisicing elit. Provident est dolorum facere? Odit, similique amet. Recusandae sint facilis debitis explicabo.
-    </div>
-  </section>
-  <div id="button_container" class="flex p2 pt1">
+  <div id="button_container" class="flex pr2 pl2 pt2">
     <button id="new_post" style="width: 100%; height: 3em; font-size: 1rem;">New Post</button>
   </div>
+  <section id="card_holder">
+  </section>
 </main>
 
 <script>
@@ -29,5 +13,75 @@
 
   document.querySelector('#new_post').addEventListener('click', (event) => {
     window.location.replace('/create');
-  })
+  });
+
+  function refreshHome() {
+    console.log('in function');
+
+    fetch('/api/posts/allposts', {
+      method: 'GET',
+      header: {
+        'Content-Type': 'application/json',
+      },
+    }).then((data) => {
+      return data.json();
+    }).then((data) => {
+      const postHome = document.querySelector('#card_holder');
+
+      const createPosts = (title, text, name, time) => {
+        const date = new Date(time);
+        const formattedDate = date.toLocaleDateString("en-US", {
+          year: "numeric",
+          month: "2-digit",
+          day: "2-digit"
+        });
+
+        const newPost = document.createElement('section');
+        newPost.id = "topic_container";
+        newPost.classList.add('m1h', 'border');
+
+        const newHead = document.createElement('header');
+        newHead.id = 'topic_header';
+        newHead.classList.add('ph', 'bg-brown');
+
+        const newTitle = document.createElement('div');
+        newTitle.classList.add('txt-sz2', 'title-txt-color', 'txt-bold');
+        newTitle.textContent = title;
+
+        const newSubs = document.createElement('div');
+        newSubs.classList.add('txt-sz1', 'flex', 'space-between', 'pt1');
+        
+        const newAuthor = document.createElement('div');
+        newAuthor.classList.add('flex-start', 'sub-txt-color');
+        newAuthor. textContent = `By: ${name}`;
+
+        const newTime = document.createElement('div');
+        newTime.classList.add('flex-end', 'sub-txt-color');
+        newTime. textContent = formattedDate;
+
+        const newText = document.createElement('div');
+        newText.id = 'topic_info';
+        newText.classList.add('ph', 'txt-sz1h');
+        newText.textContent = text;
+
+        newSubs.appendChild(newAuthor);
+        newSubs.appendChild(newTime);
+        newHead.appendChild(newTitle);
+        newHead.appendChild(newSubs);
+        newPost.appendChild(newHead);
+        newPost.appendChild(newText);
+        postHome.appendChild(newPost);
+      };
+
+      if (data.length == 0) {
+        console.log('nothing here');
+      } else {
+        for (const post of data) {
+          createPosts(post.title, post.text, post.user.username, post.updatedAt);
+        }
+      }
+    });
+  };
+  
+  refreshHome();
 </script>

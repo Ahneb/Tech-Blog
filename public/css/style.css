@@ -37,6 +37,10 @@ html {
   justify-content: space-between;
 }
 
+.w50 {
+  width: 50%;
+}
+
 /* color formatting */
 .bg-brown {
   background: var(--brown);
@@ -135,4 +139,20 @@ html {
 
 .border {
   border: 2px solid var(--brown);
+}
+
+.border-top {
+  border-top: 2px solid var(--brown);
+}
+
+.border-left {
+  border-left: 1px solid var(--brown);
+}
+
+.border-right {
+  border-right: 1px solid var(--brown);
+}
+
+.center {
+  justify-content: center;
 }

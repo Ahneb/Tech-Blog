@@ -2,6 +2,7 @@ const { Router } = require('express');
 
 const auth = require('../../middleware/auth');
 const Posts = require('../../models/Posts');
+const User = require('../../models/User');
 
 const postsRouter = new Router();
 
@@ -26,10 +27,32 @@ postsRouter.get('/foruser', auth, async  (req, res) => {
     where: {
       UserId: req.user_id,
     },
+    include: User,
+    order: [['updatedAt', 'DESC']],
   });
 
   const plainPosts = posts.map((post) => post.get({ plain: true }));
   res.status(200).json(plainPosts);
-})
+});
+
+postsRouter.get('/allposts', async (req, res) => {
+  const posts = await Posts.findAll({
+    include: User,
+    order: [['updatedAt', 'DESC']],
+  });
+
+  const plainPosts = posts.map((post) => post.get({ plain: true }));
+  res.status(200).json(plainPosts);
+});
+
+postsRouter.delete('/', async (req, res) => {
+  console.log('we hit delete');
+  console.log(req.body.id);
+  Posts.destroy({
+    where: { id: req.body.id },
+  }).then(() => {
+    res.send('deleted a post');
+  });
+});
 
 module.exports = postsRouter;

@@ -3,9 +3,9 @@
     <div class="p2 pb1">
       <div id="singup_error_msg" class="error-txt-color pb1"></div>
       <header class="txt-sz1h txt-bold title-txt-color">
-        Email:
+        Username:
       </header>
-      <input id="signup_email" type="text" placeholder="Enter Email" style="width: 100%;">
+      <input id="signup_username" type="text" placeholder="Enter Username" style="width: 100%;">
       <header class="txt-sz1h txt-bold title-txt-color pt1">
         Password:
       </header>
@@ -25,12 +25,12 @@
   document.querySelector('#create_acc').addEventListener('click', (event) => {
     event.preventDefault();
 
-    const email1 = document.querySelector('#signup_email').value;
+    const username1 = document.querySelector('#signup_username').value;
     const password1 = document.querySelector('#signup_pass1').value;
     const passcheck1 = document.querySelector('#signup_pass2').value;
     const error = document.querySelector('#singup_error_msg');
 
-    console.log( email1, password1, passcheck1);
+    console.log( username1, password1, passcheck1);
 
     error.textContent = '';
     if ( !(password1 === passcheck1) ) {
@@ -45,12 +45,12 @@
         'Content-Type': 'application/json',
       },
       body: JSON.stringify({ 
-        'email': email1, 
+        'username': username1, 
         'password': password1
         }),
     }).then((result) => {
       if (!result.ok) {
-        error.textContent = 'Email already taken'
+        error.textContent = 'Username already taken'
       } else {
         window.location.replace('/login');
       };

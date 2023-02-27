@@ -3,9 +3,9 @@
     <div class="p2 pb1">
       <div id="error_msg" class="error-txt-color pb1"></div>
       <header class="txt-sz2 title-txt-color">
-        Email:
+        Username:
       </header>
-      <input id="login_email" type="text" placeholder="Enter Email" style="width: 100%;">
+      <input id="login_username" type="text" placeholder="Enter Username" style="width: 100%;">
       <header class="txt-sz2 title-txt-color pt1">
         Password:
       </header>
@@ -40,17 +40,17 @@
   document.querySelector('#login_button').addEventListener('click', (event) => {
     event.preventDefault();
 
-    const email = document.querySelector('#login_email').value;
+    const username = document.querySelector('#login_username').value;
     const password = document.querySelector('#login_password').value;
     const error = document.querySelector('#error_msg');
 
     console.log(error);
     error.textContent = '';
-    callAPI('/user/login', 'POST', { email, password }).then((data) => {
+    callAPI('/user/login', 'POST', { username, password }).then((data) => {
       console.log('success with login post');
       window.location.replace('/');
     }).catch((e) => {
-      error.textContent = "Email or Password Incorrect";
+      error.textContent = "Username or Password Incorrect";
       console.log('error with login post', e);
     });
   });
