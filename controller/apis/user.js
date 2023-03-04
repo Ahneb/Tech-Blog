@@ -1,5 +1,5 @@
 const { Router } = require('express');
-const { User } = require('../../models/User');
+const { User } = require('../../models');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
@@ -28,6 +28,7 @@ userRouter.post('/', async (req, res) => {
     id: newUser.id,
   });
 });
+
 
 userRouter.post('/login', async (req, res) => {
   const { username, password } = req.body;
