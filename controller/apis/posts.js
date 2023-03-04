@@ -2,7 +2,7 @@ const { Router } = require('express');
 
 const auth = require('../../middleware/auth');
 const Posts = require('../../models/posts');
-const User = require('../../models/User');
+const User = require('../../models/user');
 
 const postsRouter = new Router();
 
