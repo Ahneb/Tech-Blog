@@ -29,8 +29,6 @@ userRouter.post('/', async (req, res) => {
   });
 });
 
-module.exports = userRouter;
-
 userRouter.post('/login', async (req, res) => {
   const { username, password } = req.body;
 
@@ -67,3 +65,5 @@ userRouter.post("/logout", async (req, res) => {
   res.clearCookie('session_token');
   res.end();
 });
+
+module.exports = userRouter;
